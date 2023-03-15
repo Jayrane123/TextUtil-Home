@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const foo = (text) => {
   return {
-    wordCount: !!text ? text.trim().split(" ").filter(item => !!item).length : 0,
+    // wordCount: !!text ? text.trim().split(" ").filter(item => !!item).length : 0,
     length: text.length,
   }
 }
@@ -68,6 +68,19 @@ export default function TextBox(props) {
       console.log(" Speech Synthesis Not Supported 😞");
     }
   };
+  const handlecopy=()=>{
+    console.log("I am copying");
+    var text =document.getElementById("mybox");
+    text.select();
+    navigator.clipboard.writeText(text.value);
+    document.getSelection().removeAllRanges();
+    props.showalert("Copied to clipboard","success");
+  }
+  const handleExtraSpaces =()=>{
+    let newText = text.split(/[ ]+/);
+    setText(newText.join(" "));
+    props.showalert("Extra spaces remove","success");
+  }
   const handleupclick = () => {
     // console.log("Uppercase was click" + text)
     const newstate = text.toUpperCase();
@@ -90,8 +103,7 @@ export default function TextBox(props) {
     <>
       <div
         className="container"
-        style={{ color: props.Mode === "dark" ? "white" : "blue" }}
-      >
+        style={{ color: props.Mode === "dark" ? "white" : "blue" }} >
         <h1>Convert Text</h1>
         <div className="mb-3">
           <textarea
@@ -115,6 +127,12 @@ export default function TextBox(props) {
           <button className="btn btn-primary mx-2" onClick={handlespeak}>
             speak the text
           </button>
+          <button className="btn btn-primary mx-2" onClick={handlecopy}>
+            copy text
+          </button>
+          <button className="btn btn-primary mx-2" onClick={handleExtraSpaces}>
+            Remove Extra spaces
+          </button>
         </div>
       </div>
       <div
@@ -124,11 +142,12 @@ export default function TextBox(props) {
         <h1>Your add summery</h1>
 
         <p>
-          word {foo(text).wordCount} and letter {foo(text).length}
+          {/* word {foo(text).wordCount} and letter {foo(text).length} */}
+          word {text.split(" ").filter(item=>{return item.length!==0}).length} and letter {foo(text).length}
         </p>
         {/* <p>{}</p> */}
         <h3>Word read Speed</h3>
-        <p>{0.008 * text.split(" ").length} minutes read</p>
+        <p>{0.008 * text.split(" ").filter(item=>{return item.length!==0}).length} minutes read</p>
 
         <h3 className="container mx-2">Preview</h3>
         <p>{text}</p>

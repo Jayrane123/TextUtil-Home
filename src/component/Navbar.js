@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { a } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   return (
@@ -9,9 +9,9 @@ export default function Navbar(props) {
         className={`navbar navbar-expand-lg navbar-${props.Mode} bg-${props.Mode}`}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+          <Link className="navbar-brand" to="/">
             {props.title}
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -26,19 +26,19 @@ export default function Navbar(props) {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 gap-3">
               <li className="nav-item">
-                <a className="nav-a active" aria-current="page" href="/">
+                <Link className="nav-a active" aria-current="page" to="/" color="black">
                   Home
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-a" href="/about">
+                <Link className="nav-a" to="/about" color="black">
                   About
-                </a>
+                </Link>
               </li>
             </ul>
 
             <form className="d-flex">
-              <input
+              {/* <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
@@ -46,7 +46,7 @@ export default function Navbar(props) {
               />
               <button className="btn btn-dark" type="submit">
                 Search
-              </button>
+              </button> */}
               <div className="dropdown">
                 <button
                   className="btn btn-dark dropdown-toggle mx-1"
@@ -61,38 +61,43 @@ export default function Navbar(props) {
                   style={{ backgrondColor: "black" }}
                 >
                   <li>
-                    <a
+                    <Link
                       className="dropdown-item"
                       onClick={props.violet}
-                      href="/"
+                      to="/"
                     >
                       Violet
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/" >
                       Another action
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/">
                       Something else here
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
             </form>
             <div
-              className={`form-check form-switch mx-1 -${
-                props.Mode === "light" ? "dark" : "light"
-              }`}
+              // className={`form-check form-switch mx-1 -${
+              //   props.Mode === "light" ? "dark" : "light"
+              // }`}
+              className="form-check form-switch mx-1"
             >
               <input
-                className="form-check-input"
+                // className={`form-check-input"-${
+                className={`form-check-input form-switch"-${
+                  props.Mode === "light" ? "dark" : "light"
+                }`}
                 onClick={props.toggleMode}
                 type="checkbox"
                 // role="switch"
                 id="flexSwitchCheckDefault"
+                // style={{ color: props.Mode === "dark" ? "white" : "black" }}
               />
               <label
                 className="form-check-label mx-2"

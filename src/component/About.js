@@ -1,28 +1,16 @@
-import React,{useState} from 'react'
+import React from 'react'
 
-export default function About() {
-  const [myStyle,setmyStyle]=useState({
-        color : "black",
-        backgroundColor : "white",
-        border : "1px solid white"
-    })
-  const[btnset,setbtnset]=useState("Enable dark mode")
-    const handleondrive=()=>{
-      if(myStyle.color==="white"){
-        setmyStyle({ 
-        color : "black",
-        backgroundColor : "white",
-        border : "1px solid black"})
-        setbtnset("Enable light mode")
-      }
-      else{
-        setmyStyle({ 
-          color : "white",
-          backgroundColor : "black",          
-          border : "1px solid white"})
-          setbtnset("Enable light mode")
-      }
-    }
+export default function About(props) {
+  // const [myStyle,setmyStyle]=useState({
+  //       color : "black",
+  //       backgroundColor : "white",
+  //       border : "1px solid white"
+  //   })
+  let myStyle={
+    color:props.mode==='light'?'white':"black",
+    backgroundColor:props.mode==='light'?'black':"white",
+    border:props.mode==='light'?'2px solid black':"2px solid white",
+  }
   return (
     <div className='container' style={myStyle}>
       <div className="accordion" id="accordionExample" >
@@ -63,9 +51,6 @@ export default function About() {
     </div>
   </div>
 </div>
-<div className='container my-1'>
-    <button onClick={handleondrive} className="btn btn-secondary">{btnset}</button>
-    </div>
-   </div>
+</div>
   )
 }

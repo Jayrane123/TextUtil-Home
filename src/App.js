@@ -5,16 +5,16 @@ import Navbar from './component/Navbar';
 import React, {useState} from 'react'
 import TextBox from './component/TextBox';
 import Alert from './component/Alert';
-// import { Router } from 'react-router-dom';
-// import {
-//   Route,
-//   Routes
-// } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes
+} from "react-router-dom";
 
 function App() {
-  const violet=()=>{
-    document.body.style.backgroundColor="#453bb2";
-  }
+  // const violet=()=>{
+  //   document.body.style.backgroundColor="#453bb2";
+  // }
   const [mode,setmode]=useState("light")
   const [states,setstates]=useState("Enable Dark Mode")
   const [alert,setalert]=useState(null)
@@ -32,13 +32,13 @@ function App() {
       setmode("dark")
       showalert("Dark Mode is enable","success")
       document.body.style.backgroundColor="#453bb2";
-      if(onclick(violet)){
-        document.body.style.backgroundColor="#453bb2";
-      }
+      // if(onclick(violet)){
+      //   document.body.style.backgroundColor="#453bb2";
+      // }
       setstates("Enable Dark Mode")
       
     }
-    else{
+    else if(mode==="dark"){
       setstates("Enable Light Mode")
       setmode("light")
       document.body.style.backgroundColor="white";
@@ -46,24 +46,17 @@ function App() {
       
     }
   }
-  return (
-    <>
+  return (<BrowserRouter>
+
    <Navbar  title="TextUtil" Mode={mode} toggleMode={toggleMode} States={states}  />
    <Alert alert={alert}/>
-   <div className="container" >    
-   {
-   /* <Routes>
-          <Route exact path="/about" element={<About/>}/>
-          <Route exact path="/about" />
-          <About /> }
-          <Route exact path="/" element={<>
-           
-          </>}/>
-    </Routes> */}
-    <TextBox showalert={showalert} Mode={mode}/>
-   <About/>
+   <div className="container my-4">    
+    <Routes>
+          <Route exact path="/About" element={<About />}/>
+          <Route exact path="/" element={<TextBox showalert={showalert} Mode={mode}/>}/>
+    </Routes>   
    </div>  
-    </>
+    </BrowserRouter>
   );
 }
 export default App;
