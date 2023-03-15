@@ -69,11 +69,7 @@ export default function TextBox(props) {
     }
   };
   const handlecopy=()=>{
-    console.log("I am copying");
-    var text =document.getElementById("mybox");
-    text.select();
-    navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
+    navigator.clipboard.writeText(text);
     props.showalert("Copied to clipboard","success");
   }
   const handleExtraSpaces =()=>{
@@ -143,7 +139,7 @@ export default function TextBox(props) {
 
         <p>
           {/* word {foo(text).wordCount} and letter {foo(text).length} */}
-          word {text.split(" ").filter(item=>{return item.length!==0}).length} and letter {foo(text).length}
+          word {text.split(/\s+/).filter(item=>{return item.length!==0}).length} and letter {foo(text).length}
         </p>
         {/* <p>{}</p> */}
         <h3>Word read Speed</h3>
